@@ -103,7 +103,7 @@ class ValidateUniqueTests(TestCase):
             'must be set'
         )
         for i, options in enumerate(combinations(schedules, 2)):
-            name = 'task{}'.format(i)
+            name = f'task{i}'
             options_dict = dict(options)
             with self.assertRaises(ValidationError) as cm:
                 PeriodicTask(name=name, **options_dict).validate_unique()

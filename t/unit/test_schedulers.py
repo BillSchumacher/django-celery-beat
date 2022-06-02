@@ -587,7 +587,7 @@ class test_DatabaseScheduler(SchedulerCase):
                 time.sleep(tick_interval)
                 if s.should_sync():
                     s.sync()
-        assert len(tried) == 1 and tried == set([e1.name])
+        assert len(tried) == 1 and tried == {e1.name}
 
 
 @pytest.mark.django_db()

@@ -37,9 +37,10 @@ class MigrationTests(TestCase):
         duplicates_extra = sum(count - 1 for count, _ in expected_duplicates)
         duplicates_numbers = [number for _, number in expected_duplicates]
         self.assertEqual(
-            len(files), len(set(files)) + duplicates_extra,
-            msg=('Detected migration files with the same migration number'
-                 ' (besides {})'.format(' and '.join(duplicates_numbers))))
+            len(files),
+            len(set(files)) + duplicates_extra,
+            msg=f"Detected migration files with the same migration number (besides {' and '.join(duplicates_numbers)})",
+        )
 
     def test_models_match_migrations(self):
         """Make sure that no model changes exist.
