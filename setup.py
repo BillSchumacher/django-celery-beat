@@ -73,9 +73,8 @@ with open(os.path.join(here, PACKAGE, '__init__.py')) as meta_fh:
         if line.strip() == '# -eof meta-':
             break
         for pattern, handler in pats.items():
-            m = pattern.match(line.strip())
-            if m:
-                meta.update(handler(m))
+            if m := pattern.match(line.strip()):
+                meta |= handler(m)
 
 # -*- Installation Requires -*-
 
@@ -103,11 +102,12 @@ def reqs(*f):
 
 # -*- Long Description -*-
 
+
 if os.path.exists('README.rst'):
     long_description = codecs.open('README.rst', 'r', 'utf-8').read()
     long_description_content_type = 'text/x-rst'
 else:
-    long_description = 'See http://pypi.python.org/pypi/%s' % (NAME,)
+    long_description = f'See http://pypi.python.org/pypi/{NAME}'
     long_description_content_type = 'text/markdown'
 
 # -*- %%% -*-
@@ -123,6 +123,7 @@ class pytest(setuptools.command.test.test):
     def run_tests(self):
         import pytest
         sys.exit(pytest.main(self.pytest_args))
+
 
 setuptools.setup(
     name=NAME,
