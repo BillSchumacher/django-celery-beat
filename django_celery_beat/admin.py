@@ -78,8 +78,7 @@ class PeriodicTaskForm(forms.ModelForm):
 
     def clean(self):
         data = super().clean()
-        regtask = data.get('regtask')
-        if regtask:
+        if regtask := data.get('regtask'):
             data['task'] = regtask
         if not data['task']:
             exc = forms.ValidationError(_('Need name of task'))

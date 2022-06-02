@@ -2,6 +2,8 @@
 from django.db import migrations
 
 
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -14,10 +16,11 @@ class Migration(migrations.Migration):
             options={
                 'ordering': ('event', 'latitude', 'longitude'),
                 'verbose_name': 'solar event',
-                'verbose_name_plural': 'solar events'},
+                'verbose_name_plural': 'solar events',
+            },
         ),
         migrations.AlterUniqueTogether(
             name='solarschedule',
-            unique_together=set([('event', 'latitude', 'longitude')]),
+            unique_together={('event', 'latitude', 'longitude')},
         ),
     ]
